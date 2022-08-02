@@ -2,6 +2,11 @@ import mongoose from "mongoose";
 
 const testSchema = mongoose.Schema(
     {
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: 'User'
+          },
         testName: {
             type: String,
             requireed: true,
@@ -18,6 +23,7 @@ const testSchema = mongoose.Schema(
             type: String,
             requireed: true,
         },
+
         memo:{
             type: String,
             

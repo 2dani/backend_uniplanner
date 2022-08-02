@@ -3,9 +3,10 @@ import asyncHandler from "express-async-handler"
 import Timetable from "../models/timetableModel.js"
 
 const router = express.Router()
+import { protect } from "../middleware/authMiddleware.js"
 
 // Timetable Register API
-router.post('/', asyncHandler(async (req, res) => {
+router.post('/',protect , asyncHandler(async (req, res) => {
     const { name, location, startTime, endTime, day } = req.body;
 
     const newTimetable = new Timetable({
@@ -14,6 +15,7 @@ router.post('/', asyncHandler(async (req, res) => {
         startTime: "2018-02-23T" + startTime,
         endTime: "2018-02-23T" + endTime,
         day,
+        user: req.user._id
     })
 
     const createdTimetable = await newTimetable.save()
@@ -24,13 +26,13 @@ router.post('/', asyncHandler(async (req, res) => {
 
 
 // Call all Timetable data
-router.get('/all', asyncHandler(async (req, res) => {
-    const timetable = await Timetable.find()
+router.get('/all',protect , asyncHandler(async (req, res) => {
+    const timetable = await Timetable.find({user:req.user._id})
     res.json(timetable)
 }))
 
 //remove the timetable data
-router.delete('/:id', asyncHandler(async (req, res) => {
+router.delete('/:id',protect , asyncHandler(async (req, res) => {
     const timetable = await Timetable.findById(req.params.id)
 
     if (timetable) {

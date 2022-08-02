@@ -9,7 +9,25 @@ const router = express.Router()
 
 
 
-// Idification API
+// Profile modify API
+router.put('/', protect, asyncHandler(async(req, res) => {
+    const user = await User.findById(req.user._id )
+
+    if (user) {
+        user.name = req.body.name || user.name
+        user.password = req.body.password || user.password
+
+
+        const updateUser = await user.save()
+
+        res.json(updateUser)
+
+    } else {
+        res.status(401)
+        throw new Error('User is not existed')
+    }
+}))
+
 
 //Signup API
 
@@ -68,10 +86,21 @@ router.post('/login', asyncHandler(async (req, res) => {
 
 
 // my profile API
-
 router.get('/profile', protect, asyncHandler(async (req, res) => {
     res.json(req.user)
 }))
 
+
+// delete API
+router.delete('/', protect, asyncHandler(async(req, res) => {
+    const user = await User.findById(req.user._id)
+    if (user) {
+        await user.remove()
+        res.json({ message: "user removed" })
+    } else {
+        res.status(404)
+        throw new Error("user not found")
+    }
+}))
 
 export default router

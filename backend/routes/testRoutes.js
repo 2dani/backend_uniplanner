@@ -3,27 +3,29 @@ import asyncHandler from "express-async-handler"
 import Test from "../models/testModel.js";
 
 const router = express.Router()
+import { protect } from "../middleware/authMiddleware.js"
 
 //all Test data get API
 
-router.get('/all', asyncHandler(async (req, res) => {
-    const tests = await Test.find().sort({ testDate: 1 })
+router.get('/all',protect , asyncHandler(async (req, res) => {
+    const tests = await Test.find({user:req.user._id}).sort({ testDate: 1 })
     res.json(tests)
 }))
 
 //상세 Test를 가져오는 API
-router.get("/:id", asyncHandler(async (req, res) => {
+router.get("/:id",protect , asyncHandler(async (req, res) => {
     const testOne = await Test.findById(req.params.id)
     res.json(testOne)
 }))
 
 
 //test restration API
-router.post('/', asyncHandler(async (req, res) => {
+router.post('/',protect , asyncHandler(async (req, res) => {
     const { testName, testDate, timeStart, timeEnd, memo } = req.body;
 
     const newTest = new Test({
-        testName, testDate, timeStart, timeEnd, memo
+        testName, testDate, timeStart, timeEnd, memo,
+        user: req.user._id
     })
 
     const createdTest = await newTest.save()
@@ -33,7 +35,7 @@ router.post('/', asyncHandler(async (req, res) => {
 }))
 
 // test modify API
-router.put('/:id', asyncHandler(async (req, res) => {
+router.put('/:id',protect , asyncHandler(async (req, res) => {
     const testOne = await Test.findById(req.params.id)
 
     if (testOne) {
@@ -51,13 +53,10 @@ router.put('/:id', asyncHandler(async (req, res) => {
         res.status(404)
         throw new Error("Test not found")
     }
-
-    
-
 }) )
 
 //delete API
-router.delete("/:id", asyncHandler( async (req, res) => {
+router.delete("/:id",protect , asyncHandler( async (req, res) => {
     const testOne = await Test.findById(req.params.id)
     if (testOne) {
         await testOne.remove()
@@ -89,7 +88,7 @@ router.patch("/:id", asyncHandler(async (req, res) => {
 
 // remove Testdday data api
 
-router.delete("/:id", asyncHandler(async (req, res) => {
+router.delete("/:id",protect , asyncHandler(async (req, res) => {
     const testdday = await Test.findById(req.params.id)
 
     if (testdday) {
