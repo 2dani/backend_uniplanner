@@ -27,7 +27,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 //app.use(express.json())
-app.use(cors({origin: ["http://uniplannerbackend-env.eba-2mpxvpuu.us-east-1.elasticbeanstalk.com/"], credentials: true}))
+app.use(cors({origin: ["http://uniplannerbackend-env.eba-2mpxvpuu.us-east-1.elasticbeanstalk.com"], credentials: true}))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
