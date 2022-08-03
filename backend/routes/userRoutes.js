@@ -74,7 +74,8 @@ router.post('/login', asyncHandler(async (req, res) => {
 
     if (user && (await user.matchPassword(password))) {
         res.json({
-            token: generateToken(user._id)
+            token: generateToken(user._id),
+            user
         })
     } else {
         res.status(401)
