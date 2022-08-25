@@ -1,3 +1,4 @@
+/*
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import colors from 'colors'
@@ -55,3 +56,4 @@ if (process.argv[2] === '-d') {
 } else {
   importData()
 }
+*/
