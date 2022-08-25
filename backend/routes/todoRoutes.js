@@ -5,7 +5,6 @@ import {
   getTodos,
   getProductById,
   createTodo,
-  updateProduct,
   getTopProducts,
 } from '../controllers/todoController.js'
 import Todo from '../models/todoModel.js'
@@ -16,7 +15,7 @@ router.get('/top', getTopProducts)
 router
   .route('/:id')
   .get(getProductById)
-  //.put(updateProduct)
+
 
 //update API
 router.put('/:id', protect, asyncHandler(async (req, res) => {
