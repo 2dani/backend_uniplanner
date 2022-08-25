@@ -23,7 +23,7 @@ const userSchema = mongoose.Schema(
 
 )
 
-// 암호회 된 패스워드를 매칭 및 비교 함수
+// the function, which compare the encoded password and matching
 userSchema.methods.matchPassword = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password)
 }
