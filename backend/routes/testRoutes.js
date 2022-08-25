@@ -6,7 +6,6 @@ const router = express.Router()
 import { protect } from "../middleware/authMiddleware.js"
 
 //all Test data get API
-
 router.get('/all',protect , asyncHandler(async (req, res) => {
     const tests = await Test.find({user:req.user._id}).sort({ testDate: 1 })
     res.json(tests)
@@ -88,7 +87,7 @@ router.patch("/:id", asyncHandler(async (req, res) => {
 
 // remove Testdday data api
 
-router.delete("/:id",protect , asyncHandler(async (req, res) => {
+router.delete("/:id", protect , asyncHandler(async (req, res) => {
     const testdday = await Test.findById(req.params.id)
 
     if (testdday) {

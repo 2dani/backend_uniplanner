@@ -9,19 +9,19 @@ const testSchema = mongoose.Schema(
           },
         testName: {
             type: String,
-            requireed: true,
+            required: true,
         },
         testDate: {
             type: String,
-            requireed: true,
+            required: true,
         },
         timeStart: {
             type: String,
-            requireed: true,
+            required: true,
         },
         timeEnd:{
             type: String,
-            requireed: true,
+            required: true,
         },
 
         memo:{
