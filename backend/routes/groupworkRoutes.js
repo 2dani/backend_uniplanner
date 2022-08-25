@@ -43,6 +43,8 @@ router.delete("/:id",protect , asyncHandler( async (req, res) => {
     }
 }))
 
+
+/*
 //modify Groupwork API
 router.put('/:id',protect , asyncHandler(async (req, res) => {
     const groupwork = await groupworkModel.findById(req.params.id)
@@ -64,5 +66,6 @@ router.put('/:id',protect , asyncHandler(async (req, res) => {
         throw new Error("Test not found")
     }
 }) )
+*/
 
 export default router;

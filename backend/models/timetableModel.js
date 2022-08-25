@@ -29,10 +29,7 @@ const timetableSchema = mongoose.Schema(
             required: true,
             default: 0
         },
-        itype: {
-            type: String,
-            default: "custom"
-        },
+        
     },
 
     {
