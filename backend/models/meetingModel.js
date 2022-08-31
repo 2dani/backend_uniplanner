@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+// following inputs are using for meeting
+
 const meetingSchema = mongoose.Schema(
     {
         user: {

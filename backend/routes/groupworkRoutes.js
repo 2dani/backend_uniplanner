@@ -5,16 +5,17 @@ import { protect } from "../middleware/authMiddleware.js"
 
 import groupworkModel from '../models/groupworkModel.js'
 
-// Groupwork register API
+// Groupwork register API with post method. POST send data to a web address
 router.post('/add',protect ,asyncHandler(async (req, res) => {
-    const { name, pnumber, sdate, stime, person, memo } = req.body;
+    const { name, pnumber, sdate, stime, person, memo } = req.body; //post request is delivered through req.body
 
+    //new groupwork inputs are submitted
     const newGroupwork = new groupworkModel({
         name, pnumber, sdate, stime, person, memo,
         user: req.user._id
     })
 
-    const createdGrWork = await newGroupwork.save()
+    const createdGrWork = await newGroupwork.save() // save
     res.json(createdGrWork);
 }))
 
@@ -27,7 +28,8 @@ router.get('/all',protect ,asyncHandler(async (req, res) => {
 
 // Call Groupwork Detail data API
 router.get("/:id",protect ,asyncHandler(async (req, res) => {
-    const groupwork = await groupworkModel.findById(req.params.id)
+    const groupwork = await groupworkModel.findById(req.params.id) // params : an object containing parameter values paresd from the URL path
+    // req.params.id means userId from the URL path
     res.json(groupwork)
 }))
 

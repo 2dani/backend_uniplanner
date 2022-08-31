@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 
+// following inputs are using for assignment
 
 const submitSchema = mongoose.Schema(
   {

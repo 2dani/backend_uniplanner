@@ -1,17 +1,26 @@
-import asyncHandler from 'express-async-handler'
+import asyncHandler from 'express-async-handler' // It makes your code easier to understand.
 import Todo from '../models/todoModel.js'
 
-// @desc    Fetch all products
-// @route   GET /api/products
-// @access  Public
+// show screen the Todos sorted by created Time sorted in descending
 const getTodos = asyncHandler(async (req, res) => {
   
-  //const todos = await Todo.find().sort({createdAt: -1})
   const todos = await Todo.find({ user: req.user._id }).sort({ createdAt: -1 })
   
-  res.json(todos)
+  res.json(todos) // sends a JSON response.
 
 })
+
+// register Todo 
+const createTodo = asyncHandler(async (req, res) => {
+  
+  const {todo, endDate} = req.body; // post request is delivered through req.body
+  
+  const newTodo = new Todo({ todo, endDate, user: req.user._id }) // register todo for each users
+
+  const createdTodo = await newTodo.save()
+  res.status(201).json(createdTodo)
+})
+
 
 // @desc    Fetch single product
 // @route   GET /api/products/:id
@@ -28,22 +37,6 @@ const getProductById = asyncHandler(async (req, res) => {
 })
 
 
-
-
-const createTodo = asyncHandler(async (req, res) => {
-  
-  const {todo, endDate} = req.body;
-  
-  const newTodo = new Todo({ todo, endDate, user: req.user._id })
-
-  const createdTodo = await newTodo.save()
-  res.status(201).json(createdTodo)
-})
-
-
-
-
-
 // @desc    Get top rated products
 // @route   GET /api/products/top
 // @access  Public
@@ -55,7 +48,7 @@ const getTopProducts = asyncHandler(async (req, res) => {
 
 export {
   getTodos,
-  getProductById,
   createTodo,
+  getProductById,
   getTopProducts,
 }

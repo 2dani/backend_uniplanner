@@ -1,7 +1,9 @@
 import mongoose from 'mongoose'
+// Using ES6 imports
 
 const connectDB = async () => {
   try {
+    // we have to define a connection. Bacause my app uses only one database, i should use mongoose.connect
     const conn = await mongoose.connect(process.env.MONGO_URI, {
       useUnifiedTopology: true,
       useNewUrlParser: true,

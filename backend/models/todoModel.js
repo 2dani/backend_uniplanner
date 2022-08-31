@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 
+// following inputs are using for Todolist
 
 const todoSchema = mongoose.Schema(
   {

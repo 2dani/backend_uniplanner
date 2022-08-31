@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+// following inputs are using for timetable
+
 const timetableSchema = mongoose.Schema(
 
     {
@@ -38,11 +40,7 @@ const timetableSchema = mongoose.Schema(
 
 
 
-
-
 )
-
-
 
 
 

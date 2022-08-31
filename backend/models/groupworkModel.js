@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+// following inputs are using for groupwork
+
 const groupworkSchema = mongoose.Schema(
     {
         user: {
@@ -36,7 +38,6 @@ const groupworkSchema = mongoose.Schema(
         timestamps: true
     }
 )
-
 
 
 
